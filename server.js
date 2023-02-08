@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 
 const { Configuration, OpenAIApi } = require("openai");
@@ -10,18 +11,28 @@ const app = express();
 const port = 5000;
 
 app.use(express.json());
+app.use(cors());
 
-app.get('/', async (req, res)=>{
-
+app.post('/', async (req, res)=>{
+try {
+    const prompt = req.body.text;
     const openairesponse= await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: "You are a chatbot. Now, you will only talk to me as a human. The things that come after it will be my chats. what are you sure of?",
+        prompt: `${prompt}`,
         temperature: 0.8,
-        max_tokens: 500,
+        max_tokens: 3000,
+        frequency_penalty: 0.5,
+        presence_penalty: 0,
       });
-    
-      console.log(openairesponse.data.choices[0].text);
-      res.send(openairesponse.data.choices[0].text);
+
+    console.log(openairesponse.data.choices[0].text);
+    res.json({"text": openairesponse.data.choices[0].text});
+    }
+catch(error){
+    res.status(200).json({'error': error})
+}
+
+      
 })
 
 // app.get('/h', (req,res)=>{
