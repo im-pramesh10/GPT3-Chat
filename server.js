@@ -26,18 +26,14 @@ try {
       });
 
     console.log(openairesponse.data.choices[0].text);
-    res.json({"text": openairesponse.data.choices[0].text});
+    res.status(200).json({"text": openairesponse.data.choices[0].text});
     }
 catch(error){
-    res.status(200).json({'error': error})
+    res.status(500).json({'error': error})
 }
 
       
 })
-
-// app.get('/h', (req,res)=>{
-//     res.send('hello');
-// })
 
 app.listen(port, ()=>{
     console.log(`App listening on port ${port}`)
