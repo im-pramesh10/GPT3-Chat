@@ -29,7 +29,7 @@ try {
         presence_penalty: 0,
       });
 
-    console.log(openairesponse.data.choices[0].text);
+    // console.log(openairesponse.data.choices[0].text);
     res.status(200).json({"text": openairesponse.data.choices[0].text});
     }
 catch(error){
