@@ -1,29 +1,50 @@
 import styles from "./MessageDisplay.module.css";
 import logo from "../assets/Robot.svg";
-import { useEffect, useRef } from "react";
+import {useEffect, useRef} from "react";
 
 export default function MessageDisplay({message, result, isProcessing}) {
-    const gptResponseRef = useRef();
-    useEffect(()=>{
-        // console.log("effect "+isProcessing);
+    const gptResponseRef = useRef(null);
+
+    useEffect(() => {
+        let index = 0;
+        let interval;
+
+        if (gptResponseRef.current !== null) {
+            gptResponseRef.current.innerText = "";
+        }
+        interval = setInterval(() => {
+            if (index < result.length) {
+                gptResponseRef.current.textContent += result.charAt(index);
+                index++;
+            } else {
+                clearInterval(interval);
+            }
+            // console.log("interval "+index);
+        }, 50)
+
+        return() => {
+            clearInterval(interval);
+        }
+    }, [result]);
+
+    useEffect(() => { // console.log("effect "+isProcessing);
         let intervalID;
-        if(isProcessing){
-            console.log("inside loading")
-            gptResponseRef.current.innerText="."
-    
-            intervalID = setInterval(()=>{
-                gptResponseRef.current.innerText +="."
-                if(gptResponseRef.current.innerText=== "....."){
-                    gptResponseRef.current.innerText="."
+        if (isProcessing) {
+            gptResponseRef.current.textContent = "."
+
+            intervalID = setInterval(() => {
+                gptResponseRef.current.textContent += "."
+                if (gptResponseRef.current.textContent === ".....") {
+                    gptResponseRef.current.textContent = "."
                 }
-            },800)
-        } else{
+            }, 300)
+        } else {
             clearInterval(intervalID);
         }
-        
+
         return() => clearInterval(intervalID)
-    },[isProcessing])
-    
+    }, [isProcessing])
+
     if (message !== "") {
         return (
             <div className={
@@ -44,12 +65,11 @@ export default function MessageDisplay({message, result, isProcessing}) {
                             styles.resIcon
                         }
                         src={logo}/>
-                    <p ref={gptResponseRef}>{result}</p>
+                    <p ref={gptResponseRef}></p>
                 </div>
             </div>
         );
-    }
-    else{
+    } else {
         return <></>
     }
 

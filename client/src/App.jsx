@@ -22,14 +22,14 @@ function App() {
 
         if (inputRef.current.value.toString() === "") {
             alert("Please write a message.");
-            console.log("strcheck")
+            // console.log("strcheck")
             return;
         }
 
 
-        console.log("submitting");
+        // console.log("submitting");
 
-        console.log(inputRef.current.value.toString())
+        // console.log(inputRef.current.value.toString())
         setMessage(inputRef.current.value.toString());
         setMessagePosted(!messagePosted);
 
