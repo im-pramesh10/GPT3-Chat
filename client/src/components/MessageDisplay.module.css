@@ -6,7 +6,6 @@
     width: 100vw;
     top: 5.3em;
     bottom: 10em;
-    z-index: 10;
     flex-direction: column;
 }
 .userquery{
@@ -21,7 +20,9 @@
 .gptresponse{
     display: flex;
     width: 100%;
-    background-color: #585a68;
+    background-color: #585b6b;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .resIcon {
     width:3em;

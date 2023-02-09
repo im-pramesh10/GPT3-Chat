@@ -63,7 +63,12 @@ function App() {
         }
         if (message !== "") {
             inputRef.current.value = "";
+            // setMessage("");
             fetchData();
+        }
+
+        return() =>{
+            setResult("");
         }
 
     }, [messagePosted]);
@@ -71,8 +76,7 @@ function App() {
     return (
         <div className="App">
             <Header/>
-            <div>{result}</div>
-            <MessageDisplay/>
+            <MessageDisplay message={message} result={result} isProcessing={isProcessing}/>
             <TypingArea handleSubmit={handleSubmit}
                 inputRef={inputRef}/>
         </div>
