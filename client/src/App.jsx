@@ -1,7 +1,9 @@
 import {useEffect, useRef, useState} from 'react'
-import robotLogo from '../src/assets/Robot.svg';
+// import robotLogo from '../src/assets/Robot.svg';
 import './App.css'
 import TypingArea from './components/TypingArea';
+import Header from './components/Header';
+
 
 function App() {
     const [message, setMessage] = useState("");
@@ -67,6 +69,7 @@ function App() {
 
     return (
         <div className="App">
+            <Header/>
             <div>{result}</div>
             <TypingArea handleSubmit={handleSubmit}
                 inputRef={inputRef}/>
