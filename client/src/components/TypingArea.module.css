@@ -1,0 +1,7 @@
+.rootdiv{
+    display: flex;
+    /* background-color: antiquewhite; */
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+}
