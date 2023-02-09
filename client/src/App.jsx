@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react'
 import './App.css'
 import TypingArea from './components/TypingArea';
 import Header from './components/Header';
+import MessageDisplay from './components/MessageDisplay';
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
         <div className="App">
             <Header/>
             <div>{result}</div>
+            <MessageDisplay/>
             <TypingArea handleSubmit={handleSubmit}
                 inputRef={inputRef}/>
         </div>

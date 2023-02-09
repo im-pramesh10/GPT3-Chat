@@ -1,0 +1,11 @@
+.displaywrapper{
+    display: flex;
+    outline:white;
+    color:white;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    width: 100vw;
+    top: 5.5em;
+    bottom: 10em;
+    z-index: 10;
+}
