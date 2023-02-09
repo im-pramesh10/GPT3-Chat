@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import robotLogo from '../src/assets/Robot.svg';
 import './App.css'
 import TypingArea from './components/TypingArea';
@@ -6,9 +6,14 @@ import TypingArea from './components/TypingArea';
 function App() {
   const [message, setMessage] = useState("");
   const [result, setResult] = useState("");
+  const inputRef = useRef();
 
   async function handleSubmit(event) {
     event.preventDefault();
+    console.log("submitting");
+    console.log(inputRef.current.value.toString())
+    setMessage(inputRef.current.value.toString());
+    inputRef.current.value="";
     try{
       const gptResponse = await fetch("https://gpt3-chat-rn5z.onrender.com/", {
         method: "POST",
@@ -24,7 +29,6 @@ function App() {
       }
 
       setResult(gptData.text);
-      setMessage("");
     } catch (error) {
       console.error(error);
       alert(error.message);
@@ -34,7 +38,7 @@ function App() {
   return (
     <div className="App">
     <div>{result}</div>
-      <TypingArea handleSubmit={handleSubmit} setMessage={setMessage} message={message}/>
+      <TypingArea handleSubmit={handleSubmit} inputRef={inputRef}/>
     </div>
   )
 }
